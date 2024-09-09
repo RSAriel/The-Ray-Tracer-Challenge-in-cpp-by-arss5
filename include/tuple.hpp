@@ -1,8 +1,6 @@
-#include <iostream>
-#include <cmath>
 #ifndef TUPLEH
 #define TUPLEH
-
+#include<iostream>
 
 const float EPSILON = 0.00001;
 
@@ -82,7 +80,6 @@ Tuple operator*(Tuple a, float b) {
 Tuple operator/(Tuple a, float b) {
     return Tuple(a.x / b, a.y / b, a.z / b, a.w / b);
 }
-
 
 
 #endif
