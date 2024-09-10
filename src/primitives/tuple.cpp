@@ -28,10 +28,6 @@ bool Tuple::isPoint() {
     return w == 1.0;
 }
 
-void Tuple::print() {
-    std::cout << "x: " << x << " y: " << y << " z: " << z << " w: " << w << std::endl;
-}
-
 
 Tuple Point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);

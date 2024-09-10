@@ -33,7 +33,7 @@ Projectile tick(Environment env, Projectile proj){
 
 int main() {
     
-    Projectile P(Point(0, 1, 0), normalize(Vector(1, 1.8, 0))*11.25);
+    Projectile P(Point(0, 1, 0), normalize(Vector(1, 1.8, 0))*8);
     Environment E(Vector(0, -0.1, 0), Vector(-0.01, 0, 0));
     Canvas C(900, 550);
 
