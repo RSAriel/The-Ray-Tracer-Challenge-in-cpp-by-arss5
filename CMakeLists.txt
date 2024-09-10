@@ -22,6 +22,9 @@ add_library(Primitives
 add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp )  
 target_link_libraries(RayTracerTests PRIVATE Primitives Catch2::Catch2WithMain)
 
+add_executable(RayTracer src/main.cpp )  
+target_link_libraries(RayTracer PRIVATE Primitives Catch2::Catch2WithMain)
+
 include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 

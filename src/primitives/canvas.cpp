@@ -12,6 +12,9 @@ Canvas::Canvas(int width, int height) {
 }
 
 void Canvas::write_pixel(int x, int y, Color color) {
+    if (x < 0 || x >= width || y < 0 || y >= height) {
+        return;
+    }
     pixels[x][y] = color;
 }
 

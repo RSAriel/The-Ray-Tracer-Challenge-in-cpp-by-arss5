@@ -13,6 +13,7 @@ public:
     float x, y, z, w;
 
     Tuple(float x, float y, float z, float w);
+    Tuple();
 
     bool isVector();
     bool isPoint();
@@ -21,6 +22,7 @@ public:
 
 Tuple Point(float x, float y, float z);
 Tuple Vector(float x, float y, float z);
+
 float magnitude(Tuple a);
 Tuple normalize(Tuple a);
 float dot(Tuple a, Tuple b);

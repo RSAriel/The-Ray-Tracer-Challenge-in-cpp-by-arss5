@@ -12,6 +12,14 @@ Tuple::Tuple(float x, float y, float z, float w) {
     this->w = w;
 }
 
+Tuple::Tuple() {
+    this->x = 0.0;
+    this->y = 0.0;
+    this->z = 0.0;
+    this->w = 0.0;
+}
+
+
 bool Tuple::isVector() {
     return w == 0.0;
 }
