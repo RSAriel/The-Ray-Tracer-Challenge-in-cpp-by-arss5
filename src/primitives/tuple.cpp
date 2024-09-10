@@ -28,6 +28,20 @@ bool Tuple::isPoint() {
     return w == 1.0;
 }
 
+int Tuple::get(int index) {
+    switch (index) {
+        case 0:
+            return x;
+        case 1:
+            return y;
+        case 2:
+            return z;
+        case 3:
+            return w;
+        default:
+            return -1;
+    }
+}
 
 Tuple Point(float x, float y, float z) {
     return Tuple(x, y, z, 1.0);
