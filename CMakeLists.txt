@@ -12,10 +12,17 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(RayTracerTests include/tuple.cpp include/color.cpp include/canvas.cpp tests/tuple_test.cpp  tests/canvas_test.cpp )  
-target_link_libraries(RayTracerTests PRIVATE Catch2::Catch2WithMain)
+include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
+add_library(Primitives
+    src/primitives/tuple.cpp
+    src/primitives/color.cpp
+    src/primitives/canvas.cpp
+)
 
-include_directories(PRIVATE ${CMAKE_SOURCE_DIR}/include)
+add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp )  
+target_link_libraries(RayTracerTests PRIVATE Primitives Catch2::Catch2WithMain)
+
+include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 
 include(CTest)
