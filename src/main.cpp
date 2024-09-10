@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../include/tuple.hpp"
+#include <tuple.hpp>
+#include <canvas.hpp>
 
 
 int main() {
-    Tuple ponto = Vector(1, 2, 3);
-    ponto.print();
     return 0;
 }
+

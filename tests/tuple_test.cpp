@@ -1,5 +1,6 @@
 #include <catch2/catch_all.hpp>
 #include "tuple.hpp"
+#include "color.hpp"
 
 TEST_CASE( "A tuple with w=1.0 is a point ", "[tuple]" ) {
     Tuple a(4.3, -4.2, 3.1, 1.0);
@@ -145,5 +146,35 @@ TEST_CASE ("The cross product of two vectors", "[tuple] ") {
     auto b = Vector(2, 3, 4);
     REQUIRE( cross(a, b) == Vector(-1, 2, -1) );
     REQUIRE( cross(b, a) == Vector(1, -2, 1) );
+}
+
+TEST_CASE ("Colors are (red, green, blue) tuples", "[tuple] ") {
+    Color c(-0.5, 0.4, 1.7);
+    REQUIRE( equal(c.red, -0.5) );
+    REQUIRE( equal(c.green, 0.4) );
+    REQUIRE( equal(c.blue, 1.7) );
+}
+
+TEST_CASE ("Adding colors", "[tuple] ") {
+    Color c1(0.9, 0.6, 0.75);
+    Color c2(0.7, 0.1, 0.25);
+    REQUIRE( c1 + c2 == Color(1.6, 0.7, 1.0) );
+}
+
+TEST_CASE ("Subtracting colors", "[tuple] ") {
+    Color c1(0.9, 0.6, 0.75);
+    Color c2(0.7, 0.1, 0.25);
+    REQUIRE( c1 - c2 == Color(0.2, 0.5, 0.5) );
+}
+
+TEST_CASE ("Multiplying a color by a scalar", "[tuple] ") {
+    Color c(0.2, 0.3, 0.4);
+    REQUIRE( c * 2 == Color(0.4, 0.6, 0.8) );
+}
+
+TEST_CASE ("Multiplying colors", "[tuple] ") {
+    Color c1(1, 0.2, 0.4);
+    Color c2(0.9, 1, 0.1);
+    REQUIRE( c1 * c2 == Color(0.9, 0.2, 0.04) );
 }
 

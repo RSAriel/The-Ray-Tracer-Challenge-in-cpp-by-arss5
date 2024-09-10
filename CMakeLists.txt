@@ -1,15 +1,32 @@
 cmake_minimum_required(VERSION 3.25)
 project(RayTracer)
 enable_testing()
-add_subdirectory(lib/Catch2)
 
-include_directories(PRIVATE ${CMAKE_SOURCE_DIR}/include)
+Include(FetchContent)
 
-add_executable(RayTracer src/main.cpp)
-target_link_libraries(RayTracer PRIVATE Catch2::Catch2WithMain)
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.4.0 # or a later release
+)
 
-add_executable(RayTracerTests tests/test2.cpp tests/tuple.cpp)  
-target_link_libraries(RayTracerTests PRIVATE Catch2::Catch2WithMain)
+FetchContent_MakeAvailable(Catch2)
+
+include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
+add_library(Primitives
+    src/primitives/tuple.cpp
+    src/primitives/color.cpp
+    src/primitives/canvas.cpp
+)
+
+add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp )  
+target_link_libraries(RayTracerTests PRIVATE Primitives Catch2::Catch2WithMain)
+
+add_executable(RayTracer src/main.cpp )  
+target_link_libraries(RayTracer PRIVATE Primitives Catch2::Catch2WithMain)
+
+include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
 
 include(CTest)
 add_test(NAME RayTracerTests COMMAND RayTracerTests)
