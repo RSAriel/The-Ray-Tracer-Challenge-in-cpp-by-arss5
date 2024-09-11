@@ -18,9 +18,10 @@ add_library(Primitives
     src/primitives/color.cpp
     src/primitives/canvas.cpp
     src/primitives/matrices.cpp
+    src/primitives/transformations.cpp
 )
 
-add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp tests/matrices_test.cpp)  
+add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp tests/matrices_test.cpp tests/transformations_test.cpp)  
 target_link_libraries(RayTracerTests PRIVATE Primitives Catch2::Catch2WithMain)
 
 
