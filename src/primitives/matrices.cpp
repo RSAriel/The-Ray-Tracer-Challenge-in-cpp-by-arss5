@@ -38,6 +38,52 @@ Matrix Matrix::transpose(){
     return result;
 };
 
+float Matrix::determinant(){
+    if (rows == 2 && cols == 2){
+        return get(0, 0) * get(1, 1) - get(0, 1) * get(1, 0);
+    }
+    float sum = 0;
+    for (int i = 0; i < cols; i++){
+        sum += get(0, i) * cofactor(0, i);
+    }
+    return sum;
+};
+
+Matrix Matrix::submatrix(int row, int col){
+    Matrix result(rows - 1, cols - 1);
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            if (i != row && j != col){
+                result.set(i < row ? i : i - 1, j < col ? j : j - 1, get(i, j));
+            }
+        }
+    }
+    return result;
+};
+
+float Matrix::minor(int row, int col){
+    return submatrix(row, col).determinant();
+};
+
+float Matrix::cofactor(int row, int col){
+    return (row + col) % 2 == 0 ? minor(row, col) : -minor(row, col);
+};
+
+bool Matrix::is_invertible(){
+    return determinant() != 0;
+};
+
+Matrix Matrix::inverse(){
+    Matrix result(rows, cols);
+    float det = determinant();
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            result.set(j, i, cofactor(i, j) / det);
+        }
+    }
+    return result;
+};
+
 bool operator==(Matrix a, Matrix b){
     if (a.rows != b.rows || a.cols != b.cols){
         return false;

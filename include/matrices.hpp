@@ -15,6 +15,12 @@ public:
     void set(int row, int col, float value);
     void set_all(std::vector<float> values);
     Matrix transpose();
+    float determinant();
+    Matrix submatrix(int row, int col);
+    float minor(int row, int col);
+    float cofactor(int row, int col);
+    bool is_invertible();
+    Matrix inverse();
 };
 
 bool operator==(Matrix a, Matrix b);
