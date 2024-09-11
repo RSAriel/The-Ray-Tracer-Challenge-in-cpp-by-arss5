@@ -25,6 +25,7 @@ int Intersections::size() {
 }
 
 Intersections intersect(Sphere s, Ray r) {
+    r = transform(r, s.transformation.inverse());
     Tuple sphere_to_ray = r.origin - s.center;
     float a = dot(r.direction,(r.direction));
     float b = dot(r.direction,sphere_to_ray)*2;
@@ -43,11 +44,13 @@ Intersections intersect(Sphere s, Ray r) {
 
 Intersection hit(Intersections xs) {
     Intersection i = Intersection();
-    for (const auto& intersection : xs.list) {
-        if (intersection.t >= 0) {
-            if (i.t == 0 || intersection.t < i.t) {
-                i = intersection;
-            }
+    for (const auto& intersection : xs.list) { 
+        if (intersection.t < i.t || i.t > 0) {
+            i = intersection;
+        }
+        else{
+            i.t = -1;
+            return i;
         }
     }
     return i;
