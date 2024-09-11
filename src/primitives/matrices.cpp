@@ -119,7 +119,7 @@ Matrix operator*(Matrix a, Matrix b){
     return result;
 }
 
-Matrix operator*(Matrix a, Tuple b){
+Tuple operator*(Matrix a, Tuple b){
     Matrix result(a.rows, 1);
     for (int i = 0; i < a.rows; i++){
         float sum = 0;
@@ -128,5 +128,5 @@ Matrix operator*(Matrix a, Tuple b){
         }
         result.set(i, 0, sum);
     }
-    return result;
+    return Tuple(result.get(0, 0), result.get(1, 0), result.get(2, 0), result.get(3, 0));
 }

@@ -26,6 +26,6 @@ public:
 bool operator==(Matrix a, Matrix b);
 bool operator==(Matrix a, Tuple b);
 Matrix operator*(Matrix a, Matrix b);
-Matrix operator*(Matrix a, Tuple b);
+Tuple operator*(Matrix a, Tuple b);
 
 #endif
