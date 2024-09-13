@@ -15,6 +15,7 @@ class Intersections {
         Intersections(Intersection i);
         Intersections(Intersection i1, Intersection i2);
         int size();
+        void print();
 };
 
 Intersections intersect(Sphere s, Ray r);

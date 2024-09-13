@@ -74,10 +74,10 @@ bool Matrix::is_invertible(){
 };
 
 Matrix Matrix::inverse(){
-    Matrix result(rows, cols);
+    Matrix result(this->rows, this->cols);
     float det = determinant();
-    for (int i = 0; i < rows; i++){
-        for (int j = 0; j < cols; j++){
+    for (int i = 0; i < this->rows; i++){
+        for (int j = 0; j < this->cols; j++){
             result.set(j, i, cofactor(i, j) / det);
         }
     }

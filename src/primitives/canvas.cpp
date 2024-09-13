@@ -1,7 +1,7 @@
 #include "canvas.hpp"
 
 Canvas::Canvas(int width, int height) {
-    pixels.resize(width, std::vector<Color>(height, Color(0, 1, 1)));
+    pixels.resize(width, std::vector<Color>(height, Color(0, 0, 0)));
     this->width = width;
     this->height = height;
 }
@@ -46,6 +46,14 @@ std::string Canvas::canvas_to_ppm(){
     }
     ppm_final = "P3\n" + std::to_string(width) + " " + std::to_string(height) + "\n255\n" + ppm_final;
     return ppm_final;
+}
+
+void Canvas::set_color(Color color){
+    for (int i = 0; i < width; i++){
+        for (int j = 0; j < height; j++){
+            pixels[i][j] = color;
+        }
+    }
 }
 
 void print_ppm(std::string ppm){

@@ -39,6 +39,9 @@ add_library(Objects
     src/objects/spheres.cpp
 )
 
+add_executable(RayTracer src/main.cpp)  
+target_link_libraries(RayTracer PRIVATE Primitives Objects Catch2::Catch2WithMain)
+
 add_executable(RayTracerTests ${TEST_SOURCES})  
 target_link_libraries(RayTracerTests PRIVATE Primitives Objects Catch2::Catch2WithMain)
 
