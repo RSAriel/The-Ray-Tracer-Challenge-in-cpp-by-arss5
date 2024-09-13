@@ -75,13 +75,22 @@ bool Matrix::is_invertible(){
 
 Matrix Matrix::inverse(){
     Matrix result(this->rows, this->cols);
-    float det = determinant();
+    float det = this->determinant();
     for (int i = 0; i < this->rows; i++){
         for (int j = 0; j < this->cols; j++){
-            result.set(j, i, cofactor(i, j) / det);
+            float cofactor = this->cofactor(i, j);
+            result.set(j, i, cofactor / det);
         }
     }
     return result;
+};
+
+void Matrix::identity(){
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            set(i, j, i == j ? 1 : 0);
+        }
+    }
 };
 
 bool operator==(Matrix a, Matrix b){
@@ -120,10 +129,10 @@ Matrix operator*(Matrix a, Matrix b){
 }
 
 Tuple operator*(Matrix a, Tuple b){
-    Matrix result(a.rows, 1);
-    for (int i = 0; i < a.rows; i++){
+    Matrix result(4, 1);
+    for (int i = 0; i < 4; i++){
         float sum = 0;
-        for (int j = 0; j < a.cols; j++){
+        for (int j = 0; j < 4; j++){
             sum += a.get(i, j) * b.get(j);
         }
         result.set(i, 0, sum);

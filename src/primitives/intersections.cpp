@@ -1,7 +1,7 @@
 #include <intersections.hpp>
 
 Intersections::Intersections() {
-    list = std::vector<Intersection>();
+    this->list = std::vector<Intersection>();
 }
 
 Intersections::Intersections(std::vector<Intersection> list) {
@@ -25,18 +25,17 @@ int Intersections::size() {
 }
 
 Intersections intersect(Sphere s, Ray r) {
-    Ray new_r = transform(r, s.transformation.inverse());
-    auto foo = r.origin;
-    // r.print();
-    Tuple sphere_to_ray = foo - Point(0, 0, 0);
-    // sphere_to_ray.print();
-    float a = dot(new_r.direction,new_r.direction);
-    float b = dot(new_r.direction,sphere_to_ray)*2;
+    r = transform(r, s.transformation.inverse());
+    Tuple sphere_to_ray = r.origin - s.center;
+    float a = dot(r.direction,r.direction);
+    float b = 2*dot(r.direction,sphere_to_ray);
     float c = dot(sphere_to_ray,sphere_to_ray) - 1;
-    // std::cout << a << " " <<  b << " " << c << std::endl;
     float discriminant = b * b - 4 * a * c;
     Intersections list;
-    // std::cout << discriminant << std::endl;
+        if (discriminant < 0) {
+        list = Intersections(Intersection(-1, s));
+        return list;
+    }
     float sqrt_discriminant = sqrt(discriminant);
     float t1 = (-b - sqrt_discriminant) / (2 * a);
     float t2 = (-b + sqrt_discriminant) / (2 * a);
@@ -60,7 +59,7 @@ Intersections intersect(Sphere s, Ray r) {
 
 Intersection hit(Intersections xs) {
     Intersection i = Intersection();
-    if (xs.list[0].t == 2147483647){
+    if (xs.list[0].t == -1){
         i.t = -1;
         return i;
     }

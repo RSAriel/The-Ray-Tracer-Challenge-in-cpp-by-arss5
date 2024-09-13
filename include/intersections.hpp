@@ -16,6 +16,7 @@ class Intersections {
         Intersections(Intersection i1, Intersection i2);
         int size();
         void print();
+        bool is_empty();
 };
 
 Intersections intersect(Sphere s, Ray r);

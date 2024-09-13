@@ -21,7 +21,9 @@ public:
     float cofactor(int row, int col);
     bool is_invertible();
     Matrix inverse();
+    void identity();
 };
+
 
 bool operator==(Matrix a, Matrix b);
 bool operator==(Matrix a, Tuple b);

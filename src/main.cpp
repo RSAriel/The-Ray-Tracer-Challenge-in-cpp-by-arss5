@@ -18,7 +18,7 @@ int main() {
     Canvas canvas = Canvas(canvas_pixels, canvas_pixels);
     canvas.set_color(Color(0, 1, 1));
     Color color = Color(1, 0, 0);
-    Sphere s = Sphere();
+    Sphere s = Sphere((Point(0, 0, 0)), 1);
 
     float world_y;
     float world_x;
@@ -31,15 +31,12 @@ int main() {
             Tuple position = Point(world_x, world_y, wall_z);
             Tuple test = normalize(position - ray_origin);
             r = Ray(ray_origin, test);
-            // r.print();
             xs = intersect(s, r);
-            // xs.print();
             if (hit(xs).t > 0){
                 canvas.write_pixel(x, y, color);
             }
         }
     }
-
     print_ppm(canvas.canvas_to_ppm());
     return 0;
 }

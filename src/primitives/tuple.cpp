@@ -28,7 +28,7 @@ bool Tuple::isPoint() {
     return w == 1.0;
 }
 
-int Tuple::get(int index) {
+float Tuple::get(int index) {
     switch (index) {
         case 0:
             return x;
