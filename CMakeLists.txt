@@ -12,18 +12,39 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
+set(TEST_SOURCES
+    tests/tuple_test.cpp 
+    tests/canvas_test.cpp
+    tests/matrices_test.cpp
+    tests/transformations_test.cpp
+    tests/rays_test.cpp
+    tests/spheres_test.cpp
+    tests/intersections_test.cpp
+    
+)
+
 include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
 add_library(Primitives
     src/primitives/tuple.cpp
     src/primitives/color.cpp
     src/primitives/canvas.cpp
+    src/primitives/matrices.cpp
+    src/primitives/transformations.cpp
+    src/primitives/rays.cpp
+    src/primitives/intersection.cpp
+    src/primitives/intersections.cpp
 )
 
-add_executable(RayTracerTests tests/tuple_test.cpp  tests/canvas_test.cpp )  
-target_link_libraries(RayTracerTests PRIVATE Primitives Catch2::Catch2WithMain)
+add_library(Objects
+    src/objects/spheres.cpp
+)
 
-add_executable(RayTracer src/main.cpp )  
-target_link_libraries(RayTracer PRIVATE Primitives Catch2::Catch2WithMain)
+add_executable(RayTracer src/main.cpp)  
+target_link_libraries(RayTracer PRIVATE Primitives Objects Catch2::Catch2WithMain)
+
+add_executable(RayTracerTests ${TEST_SOURCES})  
+target_link_libraries(RayTracerTests PRIVATE Primitives Objects Catch2::Catch2WithMain)
+
 
 include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
 

@@ -17,6 +17,8 @@ public:
 
     bool isVector();
     bool isPoint();
+    float get(int index);
+    void print();
 };
 
 Tuple Point(float x, float y, float z);
