@@ -1,5 +1,10 @@
 #include <intersections.hpp>
 
+const int INT_MAX = 2147483647;
+const int INT_MIN = -2147483648;
+
+
+
 Intersections::Intersections() {
     this->list = std::vector<Intersection>();
 }
@@ -24,6 +29,10 @@ int Intersections::size() {
     return list.size();
 }
 
+bool Intersections::is_empty() {
+    return list.size() == 0;
+} 
+
 Intersections intersect(Sphere s, Ray r) {
     r = transform(r, s.transformation.inverse());
     Tuple sphere_to_ray = r.origin - s.center;
@@ -31,46 +40,32 @@ Intersections intersect(Sphere s, Ray r) {
     float b = 2*dot(r.direction,sphere_to_ray);
     float c = dot(sphere_to_ray,sphere_to_ray) - 1;
     float discriminant = b * b - 4 * a * c;
+    float temp;
     Intersections list;
         if (discriminant < 0) {
-        list = Intersections(Intersection(-1, s));
         return list;
     }
     float sqrt_discriminant = sqrt(discriminant);
     float t1 = (-b - sqrt_discriminant) / (2 * a);
     float t2 = (-b + sqrt_discriminant) / (2 * a);
+    if (t2 < t1 && t2 > 0) {
+        temp = t1;
+        t1 = t2;
+        t2 = temp;
+    }
     list = Intersections(Intersection(t1, s), Intersection(t2, s));
     return list;
 }
 
-// Intersection hit(Intersections xs) {
-//     Intersection i = Intersection();
-//     for (const auto& intersection : xs.list) { 
-//         if (intersection.t < i.t || i.t > 0) {
-//             i = intersection;
-//         }
-//         else{
-//             i.t = -1;
-//             return i;
-//         }
-//     }
-//     return i;
-// }
-
 Intersection hit(Intersections xs) {
     Intersection i = Intersection();
-    if (xs.list[0].t == -1){
-        i.t = -1;
-        return i;
-    }
     for (const auto& intersection : xs.list) {
-        if (intersection.t < i.t) {
+        if (intersection.t < i.t && intersection.t > 0) {
             i = intersection;
-            if (i.t < 0) {
-                i.t = -1;
-                return i;
-            }
         }
+    }
+    if (i.t == INT_MAX){
+        i.t = INT_MIN;
     }
     return i;
 }
