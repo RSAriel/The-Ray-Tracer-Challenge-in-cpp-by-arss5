@@ -3,6 +3,8 @@
 #include "intersections.hpp"
 #include "spheres.hpp"
 
+const int INT_MIN = -2147483648;
+
 TEST_CASE ( "An intersection encapsulates t and object", "[intersections]" ) {
     Sphere s = Sphere();
     Intersection i = Intersection(3.5, s);
@@ -53,7 +55,7 @@ TEST_CASE( "The hit, when all intersections have negative t", "[intersections]" 
     Intersection i2 = Intersection(-2, s);
     Intersections xs = {i1, i2};
     Intersection i = hit(xs);
-    REQUIRE( i == Intersection() );
+    REQUIRE( i.t == INT_MIN);
 }
 
 TEST_CASE( "The hit is always the lowest nonnegative intersection", "[intersections]" ) {

@@ -13,6 +13,7 @@ public:
     Canvas(int width, int height);
     void write_pixel(int x, int y, Color color);
     std::string canvas_to_ppm();
+    void set_color(Color color);
 };
 
     void print_ppm(std::string ppm);

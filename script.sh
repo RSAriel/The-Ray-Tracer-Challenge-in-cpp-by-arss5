@@ -5,3 +5,4 @@ mkdir lib
 cd build || exit 
 cmake ..
 make
+

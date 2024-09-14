@@ -28,7 +28,7 @@ bool Tuple::isPoint() {
     return w == 1.0;
 }
 
-int Tuple::get(int index) {
+float Tuple::get(int index) {
     switch (index) {
         case 0:
             return x;
@@ -41,6 +41,10 @@ int Tuple::get(int index) {
         default:
             return -1;
     }
+}
+
+void Tuple::print() {
+    std::cout << "x: " << x << " y: " << y << " z: " << z << " w: " << w << std::endl;
 }
 
 Tuple Point(float x, float y, float z) {
@@ -61,7 +65,8 @@ Tuple normalize(Tuple a) {
 }
 
 float dot(Tuple a, Tuple b) {
-    return a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w;
+    float sum = a.x * b.x + a.y * b.y + a.z * b.z;
+    return sum;
 }
 
 Tuple cross(Tuple a, Tuple b) {

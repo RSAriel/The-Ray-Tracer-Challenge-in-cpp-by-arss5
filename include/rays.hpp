@@ -10,6 +10,7 @@ class Ray {
         Ray();
         Ray(Tuple origin, Tuple direction);
         Tuple position(float t);
+        void print();
 };
 
 Ray transform(Ray r, Matrix m);

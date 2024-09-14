@@ -14,6 +14,15 @@ Tuple Ray::position(float t) {
     return origin + direction * t;
 }
 
+void Ray::print() {
+    std::cout << "origin: ";
+    origin.print();
+    std::cout << "direction: ";
+    direction.print();
+}
+
 Ray transform(Ray r, Matrix m) {
-    return Ray(m * r.origin, m * r.direction);
+    Tuple origin = m * r.origin;
+    Tuple direction = m * r.direction;
+    return Ray(origin, direction);
 }
