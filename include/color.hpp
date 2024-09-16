@@ -7,6 +7,7 @@ public:
     float red, green, blue;
 
     Color();
+    Color(const Tuple& tuple);
     Color(float red, float green, float blue);
 };
 
