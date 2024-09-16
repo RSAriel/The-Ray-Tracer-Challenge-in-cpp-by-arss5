@@ -9,7 +9,7 @@ class Ray {
         Tuple direction;
         Ray();
         Ray(Tuple origin, Tuple direction);
-        Tuple position(float t);
+        Tuple position(double t);
         void print();
 };
 

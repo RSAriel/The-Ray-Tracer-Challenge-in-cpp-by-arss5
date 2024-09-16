@@ -6,22 +6,23 @@
 class Matrix {
 public:
     int rows, cols;
-    std::vector<std::vector<float>> matrix;
+    std::vector<std::vector<double>> matrix;
 
     Matrix(int rows, int cols);
-    Matrix();
+    Matrix();    //Problem in matrix instatiation without parameters
 
-    float get(int row, int col);
-    void set(int row, int col, float value);
-    void set_all(std::vector<float> values);
+    double get(int row, int col);
+    void set(int row, int col, double value);
+    void set_all(std::vector<double> values);
     Matrix transpose();
-    float determinant();
+    double determinant();
     Matrix submatrix(int row, int col);
-    float minor(int row, int col);
-    float cofactor(int row, int col);
+    double minor(int row, int col);
+    double cofactor(int row, int col);
     bool is_invertible();
     Matrix inverse();
     void identity();
+    void print();
 };
 
 

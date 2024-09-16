@@ -9,11 +9,11 @@
 
 int main() {
     Tuple ray_origin = Point(0, 0, -5);
-    float wall_z = 10;
-    float wall_size = 7;
+    double wall_z = 10;
+    double wall_size = 7;
     int canvas_pixels = 200;
-    float pixel_size = wall_size / canvas_pixels;
-    float half = wall_size / 2;
+    double pixel_size = wall_size / canvas_pixels;
+    double half = wall_size / 2;
 
     Canvas canvas = Canvas(canvas_pixels, canvas_pixels);
     // canvas.set_color(Color(0, 1, 1));
@@ -26,8 +26,8 @@ int main() {
     Color light_color (1, 1, 1);
     PointLight light = PointLight(light_postion, light_color);
 
-    float world_y;
-    float world_x;
+    double world_y;
+    double world_x;
     Ray r;
     Intersections xs;
     for(int y=0; y < canvas_pixels; y++){

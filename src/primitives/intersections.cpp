@@ -46,18 +46,18 @@ bool Intersections::is_empty() {
 Intersections intersect(Sphere s, Ray r) {
     r = transform(r, s.transformation.inverse());
     Tuple sphere_to_ray = r.origin - s.center;
-    float a = dot(r.direction,r.direction);
-    float b = 2*dot(r.direction,sphere_to_ray);
-    float c = dot(sphere_to_ray,sphere_to_ray) - 1;
-    float discriminant = b * b - 4 * a * c;
-    float temp;
+    double a = dot(r.direction,r.direction);
+    double b = 2*dot(r.direction,sphere_to_ray);
+    double c = dot(sphere_to_ray,sphere_to_ray) - 1;
+    double discriminant = b * b - 4 * a * c;
+    double temp;
     Intersections list;
         if (discriminant < 0) {
         return list;
     }
-    float sqrt_discriminant = sqrt(discriminant);
-    float t1 = (-b - sqrt_discriminant) / (2 * a);
-    float t2 = (-b + sqrt_discriminant) / (2 * a);
+    double sqrt_discriminant = sqrt(discriminant);
+    double t1 = (-b - sqrt_discriminant) / (2 * a);
+    double t2 = (-b + sqrt_discriminant) / (2 * a);
     //Generalizar com função sort() quando for refatorar
     if (t2 < t1 && t2 > 0) {
         temp = t1;

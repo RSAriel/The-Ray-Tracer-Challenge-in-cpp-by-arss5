@@ -3,15 +3,14 @@
 #include "color.hpp"
 #include "lights.hpp"
 
-//Maybe there is a problem in comparison between floats and doubles
 
 TEST_CASE( "The default material", "[materials]" ) {
     Material m;
     REQUIRE( m.color == Color(1, 1, 1) );
-    REQUIRE( m.ambient == 0.1f );
-    REQUIRE( m.diffuse == 0.9f );
-    REQUIRE( m.specular == 0.9f );
-    REQUIRE( m.shininess == 200.0f );
+    REQUIRE( m.ambient == 0.1);
+    REQUIRE( m.diffuse == 0.9);
+    REQUIRE( m.specular == 0.9);
+    REQUIRE( m.shininess == 200.0);
 };
 
 TEST_CASE ( "Lighting with the eye between the light and the surface", "[materials]") {

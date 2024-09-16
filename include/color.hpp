@@ -4,11 +4,11 @@
 
 class Color : public Tuple {
 public:
-    float red, green, blue;
+    double red, green, blue;
 
     Color();
     Color(const Tuple& tuple);
-    Color(float red, float green, float blue);
+    Color(double red, double green, double blue);
 };
 
 Color operator*(Color a, Color b);

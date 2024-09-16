@@ -114,3 +114,4 @@ TEST_CASE ( "The color with an intersection behind the ray", "[world]" ){
     Color c = color_at(w, r);
     REQUIRE(c == inner.material.color);
 }
+

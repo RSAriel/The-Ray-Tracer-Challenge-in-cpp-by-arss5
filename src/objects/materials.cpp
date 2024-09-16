@@ -16,7 +16,7 @@ Color lighting(Material material, PointLight light, Tuple point, Tuple eyev, Tup
     Color effective_color = material.color * light.intensity;
     Tuple lightv = normalize(light.position - point);
     Color ambient = Color(effective_color * material.ambient);
-    float light_dot_normal = dot(lightv, normalv);
+    double light_dot_normal = dot(lightv, normalv);
     Color diffuse, specular;
     if (light_dot_normal < 0) {
         diffuse = Color(0, 0, 0);
@@ -24,11 +24,11 @@ Color lighting(Material material, PointLight light, Tuple point, Tuple eyev, Tup
     } else {
         diffuse = effective_color * material.diffuse * light_dot_normal;
         Tuple reflectv = reflect(-lightv, normalv);
-        float reflect_dot_eye = dot(reflectv, eyev);
+        double reflect_dot_eye = dot(reflectv, eyev);
         if (reflect_dot_eye <= 0) {
             specular = Color(0, 0, 0);
         } else {
-            float factor = pow(reflect_dot_eye, material.shininess);
+            double factor = pow(reflect_dot_eye, material.shininess);
             specular = light.intensity * material.specular * factor;
         }
     }

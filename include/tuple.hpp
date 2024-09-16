@@ -4,28 +4,28 @@
 #include <iostream>
 #include <cmath>
 
-const float EPSILON = 0.00001;
+const double EPSILON = 0.00001;
 
-bool equal(float a, float b);
+bool equal(double a, double b);
 
 class Tuple {
 public:
-    float x, y, z, w;
+    double x, y, z, w;
 
-    Tuple(float x, float y, float z, float w);
+    Tuple(double x, double y, double z, double w);
     Tuple();
     bool isVector();
     bool isPoint();
-    float get(int index);
+    double get(int index);
     void print();
 };
 
-Tuple Point(float x, float y, float z);
-Tuple Vector(float x, float y, float z);
+Tuple Point(double x, double y, double z);
+Tuple Vector(double x, double y, double z);
 
-float magnitude(Tuple a);
+double magnitude(Tuple a);
 Tuple normalize(Tuple a);
-float dot(Tuple a, Tuple b);
+double dot(Tuple a, Tuple b);
 Tuple cross(Tuple a, Tuple b);
 Tuple reflect(Tuple in, Tuple normal);
 
@@ -33,8 +33,8 @@ bool operator==(Tuple a, Tuple b);
 Tuple operator+(Tuple a, Tuple b);
 Tuple operator-(Tuple a, Tuple b);
 Tuple operator-(Tuple a);
-Tuple operator*(Tuple a, float b);
-Tuple operator/(Tuple a, float b);
+Tuple operator*(Tuple a, double b);
+Tuple operator/(Tuple a, double b);
 
 
 #endif // TUPLE_H
