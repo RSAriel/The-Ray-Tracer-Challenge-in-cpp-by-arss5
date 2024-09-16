@@ -73,6 +73,10 @@ Tuple cross(Tuple a, Tuple b) {
     return Vector(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 }
 
+Tuple reflect(Tuple in, Tuple normal) {
+    return in - normal * 2 * dot(in, normal);
+}
+
 bool operator==(Tuple a, Tuple b) {
     return equal(a.x, b.x) && equal(a.y, b.y) && equal(a.z, b.z) && equal(a.w,b.w);
 }

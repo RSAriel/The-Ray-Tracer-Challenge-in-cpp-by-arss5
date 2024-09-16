@@ -7,6 +7,9 @@ Color::Color() : Tuple(0.0, 0.0, 0.0, 0.0) {
     this->blue = 0.0;
 }
 
+Color::Color(const Tuple& tuple) : Color(tuple.x, tuple.y, tuple.z) {}
+
+
 Color::Color(float red, float green, float blue) : Tuple(red, green, blue, 0.0) {
     this->red = red;
     this->green = green;

@@ -178,3 +178,17 @@ TEST_CASE ("Multiplying colors", "[tuple] ") {
     REQUIRE( c1 * c2 == Color(0.9, 0.2, 0.04) );
 }
 
+TEST_CASE ("Reflecting a vector approaching at 45 degrees", "[tuple] ") {
+    auto v = Vector(1, -1, 0);
+    auto n = Vector(0, 1, 0);
+    auto r = reflect(v, n);
+    REQUIRE( r == Vector(1, 1, 0) );
+}
+
+TEST_CASE ("Reflecting a vector off a slanted surface", "[tuple] ") {
+    auto v = Vector(0, -1, 0);
+    auto n = Vector(sqrt(2)/2, sqrt(2)/2, 0);
+    auto r = reflect(v, n);
+    REQUIRE( r == Vector(1, 0, 0) );
+}
+
