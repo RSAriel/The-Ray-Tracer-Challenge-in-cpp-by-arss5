@@ -1,6 +1,6 @@
 #include "computations.hpp"
 
-Computations::Computations(float t, Sphere object, Tuple point, Tuple eyev, Tuple normalv){
+Computations::Computations(double t, Sphere object, Tuple point, Tuple eyev, Tuple normalv){
     this->t = t;
     this->object = object;
     this->point = point;

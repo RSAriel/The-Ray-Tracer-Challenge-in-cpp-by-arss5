@@ -3,24 +3,24 @@
 Matrix::Matrix(int rows, int cols){
     this->rows = rows;
     this->cols = cols;
-    this->matrix = std::vector<std::vector<float>>(rows, std::vector<float>(cols, 0));
+    this->matrix = std::vector<std::vector<double>>(rows, std::vector<double>(cols, 0));
 }
 
 Matrix::Matrix(){
     this->rows = 0;
     this->cols = 0;
-    this->matrix = std::vector<std::vector<float>>();
+    this->matrix = std::vector<std::vector<double>>();
 }
 
-float Matrix::get(int row, int col){
+double Matrix::get(int row, int col){
     return this->matrix[row][col];
 }
 
-void Matrix::set(int row, int col, float value){
+void Matrix::set(int row, int col, double value){
     this->matrix[row][col] = value;
 }
 
-void Matrix::set_all(std::vector<float> values){
+void Matrix::set_all(std::vector<double> values){
     for(int i = 0; i < this->rows; i++){
         for(int j = 0; j < this->cols; j++){
             this->matrix[i][j] = values[i * this->cols + j];
@@ -38,11 +38,11 @@ Matrix Matrix::transpose(){
     return result;
 };
 
-float Matrix::determinant(){
+double Matrix::determinant(){
     if (rows == 2 && cols == 2){
         return get(0, 0) * get(1, 1) - get(0, 1) * get(1, 0);
     }
-    float sum = 0;
+    double sum = 0;
     for (int i = 0; i < cols; i++){
         sum += get(0, i) * cofactor(0, i);
     }
@@ -61,11 +61,11 @@ Matrix Matrix::submatrix(int row, int col){
     return result;
 };
 
-float Matrix::minor(int row, int col){
+double Matrix::minor(int row, int col){
     return submatrix(row, col).determinant();
 };
 
-float Matrix::cofactor(int row, int col){
+double Matrix::cofactor(int row, int col){
     return (row + col) % 2 == 0 ? minor(row, col) : -minor(row, col);
 };
 
@@ -75,10 +75,10 @@ bool Matrix::is_invertible(){
 
 Matrix Matrix::inverse(){
     Matrix result(this->rows, this->cols);
-    float det = this->determinant();
+    double det = this->determinant();
     for (int i = 0; i < this->rows; i++){
         for (int j = 0; j < this->cols; j++){
-            float cofactor = this->cofactor(i, j);
+            double cofactor = this->cofactor(i, j);
             result.set(j, i, cofactor / det);
         }
     }
@@ -90,6 +90,15 @@ void Matrix::identity(){
         for (int j = 0; j < cols; j++){
             set(i, j, i == j ? 1 : 0);
         }
+    }
+};
+
+void Matrix::print(){
+    for (int i = 0; i < rows; i++){
+        for (int j = 0; j < cols; j++){
+            std::cout << get(i, j) << " ";
+        }
+        std::cout << std::endl;
     }
 };
 
@@ -118,9 +127,11 @@ Matrix operator*(Matrix a, Matrix b){
     Matrix result(a.rows, b.cols);
     for (int i = 0; i < a.rows; i++){
         for (int j = 0; j < b.cols; j++){
-            float sum = 0;
+            double sum = 0;
             for (int k = 0; k < a.cols; k++){
-                sum += a.get(i, k) * b.get(k, j);
+                double ik = a.get(i, k);
+                double kj = b.get(k, j);
+                sum += ik * kj;
             }
             result.set(i, j, sum);
         }
@@ -131,7 +142,7 @@ Matrix operator*(Matrix a, Matrix b){
 Tuple operator*(Matrix a, Tuple b){
     Matrix result(4, 1);
     for (int i = 0; i < 4; i++){
-        float sum = 0;
+        double sum = 0;
         for (int j = 0; j < 4; j++){
             sum += a.get(i, j) * b.get(j);
         }

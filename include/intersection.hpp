@@ -4,10 +4,10 @@
 
 class Intersection {
     public:
-        float t;
+        double t;
         Sphere object;
         Intersection();
-        Intersection(float t, Sphere object);
+        Intersection(double t, Sphere object);
         void print();
 };
 

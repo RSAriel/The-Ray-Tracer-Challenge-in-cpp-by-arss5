@@ -9,7 +9,7 @@ Sphere::Sphere() {
     this->material = Material();
 }
 
-Sphere::Sphere(Tuple center, float radius) {
+Sphere::Sphere(Tuple center, double radius) {
     Matrix identity = Matrix(4, 4);
     identity.set_all({1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1});
     this->center = center;

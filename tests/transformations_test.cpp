@@ -135,3 +135,42 @@ TEST_CASE ( "Chained transformations must be applied in reverse order", "[transf
     REQUIRE(T * p == Point(15, 0, 7));
 }
 
+TEST_CASE ( "The transformation matrix for the default orientation", "[transformations]"){
+    auto from = Point(0, 0, 0);
+    auto to = Point(0, 0, -1);
+    auto up = Vector(0, 1, 0);
+    auto t = view_transform(from, to, up);
+    Matrix identity(4, 4);
+    identity.set_all({1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1});
+    REQUIRE(t == identity);
+}
+
+TEST_CASE ( "A view transformation matrix looking in positive z direction", "[transformations]"){
+    auto from = Point(0, 0, 0);
+    auto to = Point(0, 0, 1);
+    auto up = Vector(0, 1, 0);
+    auto t = view_transform(from, to, up);
+    REQUIRE(t == scaling(-1, 1, -1));
+}
+
+TEST_CASE ( "The view transformation moves the world", "[transformations]"){
+    auto from = Point(0, 0, 8);
+    auto to = Point(0, 0, 0);
+    auto up = Vector(0, 1, 0);
+    auto t = view_transform(from, to, up);
+    REQUIRE(t == translation(0, 0, -8));
+}
+
+TEST_CASE ( "An arbitrary view transformation", "[transformations]"){
+    auto from = Point(1, 3, 2);
+    auto to = Point(4, -2, 8);
+    auto up = Vector(1, 1, 0);
+    auto t = view_transform(from, to, up);
+    Matrix expected(4,4);
+    expected.set_all({-0.50709, 0.50709, 0.67612, -2.36643,
+                      0.76772, 0.60609, 0.12122, -2.82843,
+                      -0.35857, 0.59761, -0.71714, 0.00000,
+                      0.00000, 0.00000, 0.00000, 1.00000});
+
+    REQUIRE(t == expected);
+}

@@ -6,7 +6,7 @@ Intersection::Intersection() {
     this->object = Sphere();
 }
 
-Intersection::Intersection(float t, Sphere object) {
+Intersection::Intersection(double t, Sphere object) {
     this->t = t;
     this->object = object;
 }

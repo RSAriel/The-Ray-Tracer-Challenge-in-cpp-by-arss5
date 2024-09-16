@@ -5,17 +5,19 @@ class Matrix;
 
 Matrix identity();
 
-Matrix translation(float x, float y, float z);
+Matrix translation(double x, double y, double z);
 
-Matrix scaling(float x, float y, float z); 
+Matrix scaling(double x, double y, double z); 
 
-Matrix rotation_x(float r);
+Matrix rotation_x(double r);
 
-Matrix rotation_y(float r);
+Matrix rotation_y(double r);
 
-Matrix rotation_z(float r);
+Matrix rotation_z(double r);
 
-Matrix shearing(float xy, float xz, float yx, float yz, float zx, float zy);
+Matrix shearing(double xy, double xz, double yx, double yz, double zx, double zy);
+
+Matrix view_transform(Tuple from, Tuple to, Tuple up);
 
 #endif
 

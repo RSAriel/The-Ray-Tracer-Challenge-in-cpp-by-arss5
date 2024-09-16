@@ -7,12 +7,12 @@
 class Sphere {
     public:
         Tuple center;
-        float radius;
+        double radius;
         Matrix transformation;
         Material material;
 
         Sphere();
-        Sphere(Tuple center, float radius);
+        Sphere(Tuple center, double radius);
 };
 
 void set_transform(Sphere &s, Matrix t);

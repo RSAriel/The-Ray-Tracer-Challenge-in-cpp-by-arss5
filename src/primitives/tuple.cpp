@@ -1,11 +1,11 @@
 #include "tuple.hpp"
 
-bool equal(float a, float b) {
+bool equal(double a, double b) {
     return abs(a - b) < EPSILON;
 }
 
 
-Tuple::Tuple(float x, float y, float z, float w) {
+Tuple::Tuple(double x, double y, double z, double w) {
     this->x = x;
     this->y = y;
     this->z = z;
@@ -28,7 +28,7 @@ bool Tuple::isPoint() {
     return w == 1.0;
 }
 
-float Tuple::get(int index) {
+double Tuple::get(int index) {
     switch (index) {
         case 0:
             return x;
@@ -47,25 +47,25 @@ void Tuple::print() {
     std::cout << "x: " << x << " y: " << y << " z: " << z << " w: " << w << std::endl;
 }
 
-Tuple Point(float x, float y, float z) {
+Tuple Point(double x, double y, double z) {
     return Tuple(x, y, z, 1.0);
 }
 
-Tuple Vector(float x, float y, float z) {
+Tuple Vector(double x, double y, double z) {
     return Tuple(x, y, z, 0.0);
 }
 
-float magnitude(Tuple a) {
+double magnitude(Tuple a) {
     return sqrt(a.x * a.x + a.y * a.y + a.z * a.z + a.w * a.w);
 }
 
 Tuple normalize(Tuple a) {
-    float mag = magnitude(a);
+    double mag = magnitude(a);
     return Tuple(a.x / mag, a.y / mag, a.z / mag, a.w / mag);
 }
 
-float dot(Tuple a, Tuple b) {
-    float sum = a.x * b.x + a.y * b.y + a.z * b.z;
+double dot(Tuple a, Tuple b) {
+    double sum = a.x * b.x + a.y * b.y + a.z * b.z;
     return sum;
 }
 
@@ -93,11 +93,11 @@ Tuple operator-(Tuple a) {
     return Tuple(-a.x, -a.y, -a.z, -a.w);
 }
 
-Tuple operator*(Tuple a, float b) {
+Tuple operator*(Tuple a, double b) {
     return Tuple(a.x * b, a.y * b, a.z * b, a.w * b);
 }
 
-Tuple operator/(Tuple a, float b) {
+Tuple operator/(Tuple a, double b) {
     return Tuple(a.x / b, a.y / b, a.z / b, a.w / b);
 }
 

@@ -10,7 +10,7 @@ Ray::Ray(Tuple origin, Tuple direction) {
     this->direction = direction;
 }
 
-Tuple Ray::position(float t) {
+Tuple Ray::position(double t) {
     return origin + direction * t;
 }
 
