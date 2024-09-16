@@ -23,6 +23,7 @@ set(TEST_SOURCES
     tests/lights_test.cpp
     tests/materials_test.cpp
     tests/world_test.cpp
+    tests/camera_test.cpp
     
 )
 
@@ -50,6 +51,7 @@ add_library(Lights
 add_library(Scene
     src/scene/world.cpp
     src/scene/computations.cpp
+    src/scene/camera.cpp
 )
 
 add_executable(RayTracer src/main.cpp)  

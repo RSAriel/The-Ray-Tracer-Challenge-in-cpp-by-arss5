@@ -13,6 +13,10 @@ void Canvas::write_pixel(int x, int y, Color color) {
     pixels[x][y] = color;
 }
 
+Color Canvas::pixel_at(int x, int y) {
+    return pixels[x][y];
+}
+
 std::string Canvas::canvas_to_ppm(){
     std::string ppm = "";
     std::string ppm_final = "";

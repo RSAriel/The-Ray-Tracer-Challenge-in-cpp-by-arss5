@@ -12,6 +12,7 @@ Matrix::Matrix(){
     this->matrix = std::vector<std::vector<double>>();
 }
 
+
 double Matrix::get(int row, int col){
     return this->matrix[row][col];
 }
