@@ -25,6 +25,16 @@ Intersections::Intersections(Intersection i1, Intersection i2) {
     list.push_back(i2);
 }
 
+void Intersections::add(Intersection i) {
+    list.push_back(i);
+}
+
+void Intersections::sort() {
+    std::sort(list.begin(), list.end(), [](Intersection a, Intersection b) {
+        return a.t < b.t;
+    });
+}
+
 int Intersections::size() {
     return list.size();
 }
@@ -48,6 +58,7 @@ Intersections intersect(Sphere s, Ray r) {
     float sqrt_discriminant = sqrt(discriminant);
     float t1 = (-b - sqrt_discriminant) / (2 * a);
     float t2 = (-b + sqrt_discriminant) / (2 * a);
+    //Generalizar com função sort() quando for refatorar
     if (t2 < t1 && t2 > 0) {
         temp = t1;
         t1 = t2;

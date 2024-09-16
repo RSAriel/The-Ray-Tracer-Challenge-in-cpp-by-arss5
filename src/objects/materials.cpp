@@ -11,6 +11,7 @@ Material::Material() {
     shininess = 200.0;
 };
 
+//Maybe should be in lights.hpp
 Color lighting(Material material, PointLight light, Tuple point, Tuple eyev, Tuple normalv) {
     Color effective_color = material.color * light.intensity;
     Tuple lightv = normalize(light.position - point);
