@@ -28,7 +28,7 @@ set(TEST_SOURCES
 )
 
 include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
-add_library(Primitives
+add_library(Primitives SHARED
     src/primitives/tuple.cpp
     src/primitives/color.cpp
     src/primitives/canvas.cpp
@@ -39,20 +39,21 @@ add_library(Primitives
     src/primitives/intersections.cpp
 )
 
-add_library(Objects
+add_library(Objects SHARED
     src/objects/spheres.cpp
     src/objects/materials.cpp
 )
 
-add_library(Lights
+add_library(Lights SHARED
     src/lights/lights.cpp
 )
 
-add_library(Scene
+add_library(Scene SHARED
     src/scene/world.cpp
     src/scene/computations.cpp
     src/scene/camera.cpp
 )
+
 
 add_executable(RayTracer src/main.cpp)  
 target_link_libraries(RayTracer PRIVATE Primitives Objects Lights Scene Catch2::Catch2WithMain)
@@ -64,6 +65,4 @@ target_link_libraries(RayTracerTests PRIVATE Primitives Objects Lights Scene Cat
 include_directories(PUBLIC ${CMAKE_SOURCE_DIR}/include)
 
 
-include(CTest)
-add_test(NAME RayTracerTests COMMAND RayTracerTests)
 

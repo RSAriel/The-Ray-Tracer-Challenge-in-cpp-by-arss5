@@ -1,55 +1,83 @@
-#include <iostream>
-#include <tuple.hpp>
-#include <canvas.hpp>
-#include <color.hpp>
-#include <rays.hpp>
-#include <spheres.hpp>
-#include <intersection.hpp>
-#include <intersections.hpp>
+#include "camera.hpp"
+#include "canvas.hpp"
+#include "color.hpp"
+#include "computations.hpp"
+#include "intersection.hpp"
+#include "intersections.hpp"
+#include "lights.hpp"
+#include "materials.hpp"
+#include "matrices.hpp"
+#include "rays.hpp"
+#include "spheres.hpp"
+#include "transformations.hpp"
+#include "tuple.hpp"
+#include "world.hpp"
+
 
 int main() {
-    Tuple ray_origin = Point(0, 0, -5);
-    double wall_z = 10;
-    double wall_size = 7;
-    int canvas_pixels = 200;
-    double pixel_size = wall_size / canvas_pixels;
-    double half = wall_size / 2;
+ 
+    World world = World();
+    world.light = PointLight(Point(-10, 10, -10), Color(1, 1, 1));
 
-    Canvas canvas = Canvas(canvas_pixels, canvas_pixels);
-    // canvas.set_color(Color(0, 1, 1));
-    Color color = Color(1, 0, 0);
-    Sphere s = Sphere((Point(0, 0, 0)), 1);
-    s.material = Material();
-    s.material.color = Color(0.5, 0.2, 1);
-    s.material.shininess = 120;
-    Tuple light_postion = Point(-10, 10, -10);
-    Color light_color (1, 1, 1);
-    PointLight light = PointLight(light_postion, light_color);
+    Sphere floor = Sphere();
+    set_transform(floor, scaling(10, 0.01, 10));
+    floor.material = Material();
+    floor.material.color = Color(1, 0.9, 0.9);
+    floor.material.specular = 0;
+    world.add(floor);
 
-    double world_y;
-    double world_x;
-    Ray r;
-    Intersections xs;
-    for(int y=0; y < canvas_pixels; y++){
-        world_y = half - pixel_size * y;
-        for(int x=0; x < canvas_pixels; x++){
-            world_x = -half + pixel_size * x;
-            Tuple position = Point(world_x, world_y, wall_z);
-            Tuple direction_normal = normalize(position - ray_origin);
-            r = Ray(ray_origin, direction_normal);
-            xs = intersect(s, r);
-            if (xs.is_empty()){
-                continue;
-            }else if (hit(xs).t > 0){
-                Tuple point = r.position(hit(xs).t);
-                Tuple normal = normal_at(s, point); //Esse S precisa ser o objeto que foi atingido (hit(xs).object)
-                Tuple eye = -r.direction;
-                color = lighting(s.material, light, point, eye, normal); //Aqui também
-                canvas.write_pixel(x, y, color);
-            }
-        }
-    }
-    print_ppm(canvas.canvas_to_ppm());
+    Sphere left_wall = Sphere();
+    set_transform(left_wall, translation(0, 0, 5)   *
+                             rotation_y(-M_PI/4)    *
+                             rotation_x(M_PI/2)     *
+                             scaling(10, 0.01, 10));
+    left_wall.material = floor.material;
+    world.add(left_wall);
+
+    Sphere right_wall = Sphere();
+    set_transform(right_wall, translation(0, 0, 5)  *
+                              rotation_y(M_PI/4)   *
+                              rotation_x(M_PI/2)   *
+                              scaling(10, 0.01, 10));
+    right_wall.material = floor.material;
+    world.add(right_wall);
+
+
+    Sphere middle = Sphere();
+    set_transform(middle, translation(-0.5, 1, 0.5));
+    middle.material = Material();
+    middle.material.color = Color(0.1, 1, 0.5);
+    middle.material.diffuse = 0.7;
+    middle.material.specular = 0.3;
+    world.objects.push_back(middle);
+    world.add(middle);
+
+
+    Sphere right = Sphere();
+    set_transform(right, translation(1.5, 0.5, -0.5) *
+                         scaling(0.5, 0.5, 0.5));
+    right.material = Material();
+    right.material.color = Color(0.5, 1, 0.1);
+    right.material.diffuse = 0.7;
+    right.material.specular = 0.3;
+    world.objects.push_back(right);
+    world.add(right);
+
+    Sphere left = Sphere();
+    set_transform(left, translation(-1.5, 0.33, -0.75) *
+                        scaling(0.33, 0.33, 0.33));
+    left.material = Material();
+    left.material.color = Color(1, 0.8, 0.1);
+    left.material.diffuse = 0.7;
+    left.material.specular = 0.3;
+    world.objects.push_back(left);
+    world.add(left);
+
+
+    Camera camera = Camera(500, 250, M_PI/3);
+    camera.transform = view_transform(Point(0, 1.5, -5), Point(0, 1, 0), Vector(0, 1, 0));
+
+    Canvas image = render(camera, world);
+    print_ppm(image.canvas_to_ppm());
     return 0;
 }
-

@@ -13,6 +13,7 @@ class World {
         PointLight light;
 
         World();
+        void add(Sphere s);
 };
 
 World default_world();
@@ -20,7 +21,4 @@ Intersections intersect_world(World w, Ray r);
 Color shade_hit(World world, Computations comps);
 Color color_at(World world, Ray r);
 
-
-
 #endif
-

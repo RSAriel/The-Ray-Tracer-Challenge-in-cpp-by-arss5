@@ -1,6 +1,15 @@
 #include "world.hpp"
 
-World::World(){}
+
+
+World::World(){
+    this->objects = std::vector<Sphere>(); 
+    this->light = PointLight();
+}
+
+void World::add(Sphere s){
+    this->objects.push_back(s);
+}
 
 World default_world(){
     World w;
