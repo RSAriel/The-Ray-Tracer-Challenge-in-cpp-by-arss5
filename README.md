@@ -8,7 +8,8 @@ Finished chapter 7, currently working in a small bug that doesn't render the obj
 This project was build using CMake using Linux, may not work on Windows. You need a ppm viewer to see the images generated, that could be a VSCode extension or an image editor
 
 To build the project, run the following commands or just run ./script.sh:
-    mdkir build && cd build && cmake .. && make 
+
+mdkir build && cd build && cmake .. && make 
     
 ./RayTracer runs what is on the Main.cpp files
 ./RayTracerTestes[tag] run all the test suites (the "tag" argument is optional use it to run a specific test suite, like [sphere] for example
