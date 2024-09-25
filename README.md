@@ -1,5 +1,4 @@
-"After completing a simple Ray Tracer in my Computer Graphics class, I became really interested in the subject and decided to dive deeper. I am currently rewriting the project, adding new functionalities while following the book The Ray Tracer Challenge, which uses a Test-Driven Development approach. This has been helpful in fixing bugs and addressing unknown behaviors from the previous version. My goal is to complete the book and implement additional features not originally covered, such as Anti-Aliasing, Motion Blur, Bounding Box, and more."
-
+After completing a simple Ray Tracer in my Computer Graphics class, I became really interested in the subject and decided to dive deeper. I am currently rewriting the project, adding new functionalities while following the book The Ray Tracer Challenge, which uses a Test-Driven Development approach. This has been helpful in fixing bugs and addressing unknown behaviors from the previous version. My goal is to complete the book and implement additional features not originally covered, such as Anti-Aliasing, Motion Blur, Bounding Box, and more.
 
 
 ###How to run
